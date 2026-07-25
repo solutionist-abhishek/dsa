@@ -1,177 +1,218 @@
-# Frequency Counting
+# Traversal
 
-Frequency Counting is one of the most fundamental techniques used in Arrays and Strings. It helps you efficiently count how many times each element appears in a collection, often reducing brute-force `O(n²)` solutions to `O(n)`.
+Traversal is one of the most basic and essential techniques in Arrays and Strings. It involves visiting each element exactly once (or in a specific order) to process, search, modify, or collect information.
+
+Almost every array or string problem begins with traversal.
 
 ---
 
-## 📌 When to Use Frequency Counting
+## 📌 When to Use Traversal
 
-Use this technique when a problem asks about:
+Use traversal when a problem asks you to:
 
-- Counting occurrences of elements
-- Detecting duplicates
-- Finding unique elements
-- Comparing two arrays or strings
-- Anagrams
-- Majority element
-- Missing or extra elements
-- Character frequency
-- Pair counting based on frequency
+- Search for an element
+- Find maximum or minimum
+- Calculate sum or average
+- Count occurrences
+- Modify elements
+- Validate a condition
+- Compare arrays or strings
+- Build a new array or string
+- Process each element exactly once
 
 ---
 
 ## 💡 Core Idea
 
-Store the frequency of each element in a hash map (dictionary).
+Visit every element one by one and perform the required operation.
 
-Instead of searching repeatedly, count once and use the stored frequencies.
+Instead of repeatedly accessing elements randomly, process them sequentially.
 
 ---
 
 ## ⏱️ Time Complexity
 
-| Operation | Complexity |
-|-----------|------------|
-| Build Frequency Map | **O(n)** |
-| Lookup Frequency | **O(1)** (average) |
-| Overall | **O(n)** |
+| Traversal Type | Complexity |
+|---------------|------------|
+| Single Traversal | **O(n)** |
+| Reverse Traversal | **O(n)** |
+| Two Independent Traversals | **O(n)** |
+| Nested Traversal | **O(n²)** |
 
-Space Complexity: **O(n)**
+Space Complexity: **O(1)** (if no extra data structure is used)
 
 ---
 
-# Python Template
+# Python Templates
 
-### Using Dictionary
+### Traverse an Array
 
 ```python
-freq = {}
-
 for num in nums:
-    freq[num] = freq.get(num, 0) + 1
+    print(num)
 ```
 
 ---
 
-### Using Counter
+### Traverse Using Index
 
 ```python
-from collections import Counter
+for i in range(len(nums)):
+    print(nums[i])
+```
 
-freq = Counter(nums)
+---
+
+### Reverse Traversal
+
+```python
+for i in range(len(nums) - 1, -1, -1):
+    print(nums[i])
+```
+
+---
+
+### Traverse a String
+
+```python
+for ch in s:
+    print(ch)
+```
+
+---
+
+### Traverse with Index and Value
+
+```python
+for i, num in enumerate(nums):
+    print(i, num)
 ```
 
 ---
 
 ## Common Operations
 
-### Count Frequency
+### Find Maximum
 
 ```python
-freq = Counter(nums)
-print(freq[5])
+maximum = nums[0]
+
+for num in nums:
+    maximum = max(maximum, num)
 ```
 
 ---
 
-### Check Duplicate
+### Find Minimum
 
 ```python
-if freq[x] > 1:
-    print("Duplicate")
+minimum = nums[0]
+
+for num in nums:
+    minimum = min(minimum, num)
 ```
 
 ---
 
-### Find Unique Elements
+### Calculate Sum
 
 ```python
-for num, count in freq.items():
-    if count == 1:
-        print(num)
+total = 0
+
+for num in nums:
+    total += num
 ```
 
 ---
 
-### Find Maximum Frequency
+### Count Occurrences
 
 ```python
-max_freq = max(freq.values())
+count = 0
+
+for num in nums:
+    if num == target:
+        count += 1
 ```
 
 ---
 
-### Element with Maximum Frequency
+### Find First Occurrence
 
 ```python
-max_element = max(freq, key=freq.get)
+for i, num in enumerate(nums):
+    if num == target:
+        print(i)
+        break
 ```
 
 ---
 
-### Remove an Element
+### Modify Elements
 
 ```python
-del freq[x]
+for i in range(len(nums)):
+    nums[i] *= 2
 ```
 
 ---
 
-### Sort by Frequency
+### Build a New Array
 
 ```python
-sorted(freq.items(), key=lambda x: x[1])
-```
+result = []
 
-Descending
-
-```python
-sorted(freq.items(), key=lambda x: x[1], reverse=True)
+for num in nums:
+    result.append(num * 2)
 ```
 
 ---
 
 ## Common Patterns
 
-### Pattern 1: Count Everything
+### Pattern 1: Simple Traversal
 
 ```python
-freq = Counter(nums)
+for num in nums:
+    # Process num
 ```
 
 ---
 
-### Pattern 2: Compare Frequencies
+### Pattern 2: Index-Based Traversal
 
 ```python
-Counter(s) == Counter(t)
-```
-
-Used in **Anagram** problems.
-
----
-
-### Pattern 3: Build Frequency While Traversing
-
-```python
-freq = {}
-
-for x in nums:
-    freq[x] = freq.get(x, 0) + 1
+for i in range(len(nums)):
+    # Use nums[i]
 ```
 
 ---
 
-### Pattern 4: Decrease Frequency
+### Pattern 3: Reverse Traversal
 
 ```python
-freq[x] -= 1
-
-if freq[x] == 0:
-    del freq[x]
+for i in range(len(nums) - 1, -1, -1):
+    # Process from end
 ```
 
-Useful in sliding window problems.
+---
+
+### Pattern 4: Simultaneous Index and Value
+
+```python
+for i, num in enumerate(nums):
+    # Use both index and value
+```
+
+---
+
+### Pattern 5: Conditional Traversal
+
+```python
+for num in nums:
+    if condition(num):
+        # Perform action
+```
 
 ---
 
@@ -179,68 +220,79 @@ Useful in sliding window problems.
 
 ### Easy
 
-- ✅ Contains Duplicate
-- ✅ Valid Anagram
-- ✅ Majority Element
-- ✅ Single Number
-- ✅ Find Lucky Integer in an Array
-- ✅ Unique Number of Occurrences
-- ✅ Find the Difference
-- ✅ Ransom Note
-- ✅ First Unique Character in a String
+- ✅ Linear Search
+- ✅ Find Maximum Number
+- ✅ Find Minimum Number
+- ✅ Remove Element
+- ✅ Remove Duplicates from Sorted Array
+- ✅ Find Numbers with Even Number of Digits
+- ✅ Richest Customer Wealth
+- ✅ Running Sum of 1D Array
+- ✅ Shuffle the Array
+- ✅ Kids With the Greatest Number of Candies
 
 ---
 
 ### Medium
 
-- ✅ Top K Frequent Elements
-- ✅ Sort Characters By Frequency
-- ✅ Group Anagrams
-- ✅ Find All Anagrams in a String
-- ✅ Longest Palindrome
-- ✅ Equal Row and Column Pairs
-- ✅ Maximum Number of Balloons
-- ✅ Hand of Straights
+- ✅ Product of Array Except Self
+- ✅ Rotate Array
+- ✅ Spiral Matrix
+- ✅ Diagonal Traverse
+- ✅ Set Matrix Zeroes
+- ✅ Sort Colors
+- ✅ Merge Intervals
+- ✅ Game of Life
 
 ---
 
 ## Tips
 
-- Prefer `collections.Counter` for cleaner code.
-- Use a dictionary when custom updates are needed.
-- Frequency counting often serves as the foundation for **Sliding Window** problems.
-- Always check whether the problem involves counting, duplicates, or comparisons before considering nested loops.
+- Traversal is the foundation of almost every array and string algorithm.
+- Choose **value-based traversal** when you only need elements.
+- Choose **index-based traversal** when you need to modify elements or access neighbors.
+- Use **reverse traversal** when deleting elements or processing from the end.
+- Avoid nested loops unless the problem genuinely requires comparing every pair.
 
 ---
 
 # Cheat Sheet
 
 ```python
-from collections import Counter
+# Value traversal
+for num in nums:
+    ...
 
-freq = Counter(nums)
+# Index traversal
+for i in range(len(nums)):
+    ...
 
-freq[x]          # Frequency of x
+# Reverse traversal
+for i in range(len(nums) - 1, -1, -1):
+    ...
 
-freq.get(x, 0)   # Safe lookup
+# Index and value
+for i, num in enumerate(nums):
+    ...
 
-freq[x] += 1     # Increment
+# Traverse string
+for ch in s:
+    ...
 
-freq[x] -= 1     # Decrement
+# Sum
+total += num
 
-del freq[x]      # Delete key
+# Maximum
+maximum = max(maximum, num)
 
-max(freq.values())           # Maximum frequency
-
-max(freq, key=freq.get)      # Element with maximum frequency
-
-Counter(a) == Counter(b)     # Compare frequencies
+# Minimum
+minimum = min(minimum, num)
 ```
 
 ---
 
 ## Key Takeaway
 
-> **Frequency Counting transforms repeated searching into constant-time lookups using a hash map.**
+> **Traversal is the process of visiting each element in an array or string to perform operations efficiently.**
 >
-> Whenever you see **count**, **duplicate**, **unique**, **anagram**, or **occurrence**, think **Frequency Counting** first.
+> Whenever you need to **search**, **count**, **update**, **compare**, or **process every element**, traversal is usually the first technique to consider.
